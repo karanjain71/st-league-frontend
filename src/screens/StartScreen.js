@@ -12,10 +12,10 @@ const StartScreen = ({navigation,}) => {
             <Center flex={1} style={styles.container}>
                 <Image source={Login} style={styles.image} resizeMode="cover"></Image>
                     <TouchableOpacity style={[styles.buttons, {backgroundColor:"#0096FF"}]}  onPress={() => navigation.navigate("Register")}>
-                        <Text>Sign Up</Text>
+                        <Text>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.buttons, {backgroundColor:"#FFD32D"}]} block onPress={()=> navigation.navigate("Login")}>
-                        <Text>Sign In</Text>
+                        <Text>Login</Text>
                     </TouchableOpacity>
             </Center>
         </>

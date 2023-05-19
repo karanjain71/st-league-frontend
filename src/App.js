@@ -5,11 +5,15 @@ import {NavigationContainer} from "@react-navigation/native"
 import {createStackNavigator} from "@react-navigation/stack"
 
 import Home from "./screens/Home"
+import MyContests from "./screens/MyContests"
 import Login from './screens/Login'
 import ResetPassword from './screens/ResetPassword'
 import ForgotPassword from './screens/ForgotPassword'
 import Register from './screens/Register'
 import StartScreen from './screens/StartScreen'
+import Profile from './screens/Profile'
+import MoreSettings from './screens/MoreSettings'
+import Footer from './components/Footer'
 
 
 const Stack = createStackNavigator()
@@ -17,7 +21,7 @@ const Stack = createStackNavigator()
 
 function App() {
 
-  const isAuthenticated = false
+  const isAuthenticated = true
   
   return (
 
@@ -27,6 +31,10 @@ function App() {
           {isAuthenticated? (
             <>
               <Stack.Screen name="Home" component={Home}/>
+              <Stack.Screen name="MyContests" component={MyContests}/>
+              <Stack.Screen name="Profile" component={Profile}/>
+              <Stack.Screen name="MoreSettings" component={MoreSettings}/>
+              <Stack.Screen name="Footer" component={Footer}/>
             </>
           ) : (
             <>

@@ -4,7 +4,7 @@ import {Container, FormControl, Button, Text, Heading, Input, Item, Center, Box}
 
 import LoginImage from "../assets/login-image.jpg"
 import { CurrentRenderContext } from "@react-navigation/native";
-
+import { postLogin } from "../helpers/backend_helper";
 
 const Login = ({navigation,}) => {
 
@@ -23,6 +23,12 @@ const Login = ({navigation,}) => {
     // }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const loginSubmit = async () => {
+        console.log("coming here mannnnn")
+        const response = await postLogin(email, password)
+        console.log(response + " here")
+    }
     
     return (
         <>
@@ -51,7 +57,7 @@ const Login = ({navigation,}) => {
                             onChangeText={(text) => setPassword(text)}
                         />
                     </Box>;
-                    <TouchableOpacity block style={[styles.buttons, {backgroundColor:"#0096FF"}]}>
+                    <TouchableOpacity block style={[styles.buttons, {backgroundColor:"#0096FF"}]} onPress={() => loginSubmit()}>
                         <Text>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
