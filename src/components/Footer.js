@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { NativeBaseProvider, Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Pressable } from 'native-base';
+import { NativeBaseProvider, Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Pressable, Fab } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {View} from 'react-native'
+import {View, TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 const Footer = (props) => {
@@ -15,7 +15,7 @@ const Footer = (props) => {
 
     const goToMyContests = () => {
         setSelected(1)
-        navigation.navigate("MyContests")
+        navigation.navigate("My Contests")
     }
     const goToProfile = () => {
         setSelected(2)
@@ -23,10 +23,9 @@ const Footer = (props) => {
     }
     const goToMore = () => {
         setSelected(3)
-        navigation.navigate("MoreSettings")
+        navigation.navigate("More Settings")
     }
     useEffect(() => {
-        console.log(selected + " here")
     },[selected])
   return <>
     <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
@@ -67,6 +66,7 @@ const Footer = (props) => {
           </Pressable>
         </HStack>
       </Box>
+      {/* <Fab renderInPortal={false} shadow={2} placement="top-right" size="sm" icon={<Icon color="white" name="lightbulb" size="4" />} label="Quick Start" /> */}
     </View>
     </>;
 }

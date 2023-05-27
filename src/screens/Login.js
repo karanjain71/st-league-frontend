@@ -8,26 +8,11 @@ import { postLogin } from "../helpers/backend_helper";
 
 const Login = ({navigation,}) => {
 
-    // const dispatch = useDispatch()
-    // const postState = useSelector((state) => state.post)
-    // const userState = useSelector((state) => state.auth)
-    // console.log(postState,'poststate')
-    // console.log(userState,'userState')
-    // console.log(postState.loading, 'loading')
-    // useEffect(() => {
-    //     dispatch(getPosts())
-    // }, [])
-
-    // if(postState.loading){
-    //     return <EmptyContainer/>
-    // }
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("karanjain71@gmail.com")
+    const [password, setPassword] = useState("aditi")
 
     const loginSubmit = async () => {
-        console.log("coming here mannnnn")
         const response = await postLogin(email, password)
-        console.log(response + " here")
     }
     
     return (

@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { NativeBaseProvider, Box, Text, Heading, VStack, FormControl,
-   Input, Link, Button, HStack, Center, Pressable, Badge, Spacer, Flex } from 'native-base';
+   Input, Link, Button, HStack, Center, Pressable, Badge, Spacer, Flex, Fab } from 'native-base';
 // import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import {SafeAreaView, StyleSheet, Image, ScrollView, TouchableOpacity, View} from "react-native"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from "../components/Footer";
+import { MaterialIcons } from "@expo/vector-icons";
+
 const Home = ({navigation,}) => {
 
     // const dispatch = useDispatch()
@@ -21,6 +23,9 @@ const Home = ({navigation,}) => {
     //     return <EmptyContainer/>
     // }
     // const [selected, setSelected] = React.useState(1);
+    const openMarketPage = () => {
+      navigation.navigate("Market Details")
+    }
 
     
     return (
@@ -104,7 +109,25 @@ const Home = ({navigation,}) => {
       </Pressable>
     </Box>
               </ScrollView>
-              
+              <TouchableOpacity
+                onPress={openMarketPage}
+                style={{
+                  borderWidth: 1,
+                  borderColor: 'rgba(0,0,0,0.2)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 80,
+                  position: 'absolute',
+                  bottom: 70,
+                  right: 10,
+                  height: 35,
+                  backgroundColor: '#fff',
+                  borderRadius: 100,
+                }}
+              >
+                <Text>Market</Text>
+              </TouchableOpacity>
+                {/* <Fab renderInPortal={false} shadow={2} placement="top-right" size="sm" icon={<Icon color="white" name="lightbulb" size="4" />} label="Quick Start" /> */}
                 <Footer/>
             </SafeAreaView>
         </>

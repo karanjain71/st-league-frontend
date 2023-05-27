@@ -52,7 +52,6 @@ const MyContests = ({navigation,}) => {
               <Box flex={1} alignItems="center" mx="3" p={2} cursor="pointer">
                 <Pressable
                   onPress={() => {
-                    console.log(i);
                     setIndex(i);
                   }}
                 >
