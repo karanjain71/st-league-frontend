@@ -7,7 +7,7 @@ import {
   Animated,
   Pressable,
 } from 'react-native';
-import {TabView, SceneMap} from 'react-native-tab-view';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {
   NativeBaseProvider,
   Box,
@@ -17,6 +17,7 @@ import {
   VStack,
   Spacer,
   Icon,
+  Divider,
 } from 'native-base';
 import Footer from '../components/Footer';
 import {
@@ -195,29 +196,17 @@ const MarketDetails = ({navigation}) => {
   }, []);
 
   const renderTabBar = props => {
-    const inputRange = props.navigationState.routes.map((x, i) => i);
     return (
-      <Box flexDirection="row" borderColor="red">
-        {props.navigationState.routes.map((route, i) => {
-          const opacity = props.position.interpolate({
-            inputRange,
-            outputRange: inputRange.map(inputIndex =>
-              inputIndex === i ? 1 : 0.3,
-            ),
-          });
-
-          return (
-            <Box flex={1} alignItems="center" mx="3" p={2} cursor="pointer">
-              <Pressable
-                onPress={() => {
-                  setIndex(i);
-                }}>
-                <Animated.Text style={{opacity}}>{route.title}</Animated.Text>
-              </Pressable>
-            </Box>
-          );
-        })}
-      </Box>
+      <>
+        <TabBar
+          {...props}
+          indicatorStyle={{backgroundColor: 'white'}}
+          renderLabel={({route, focused, color}) => (
+            <Text style={{color}}>{route.title}</Text>
+          )}
+        />
+        <Divider />
+      </>
     );
   };
 
@@ -229,7 +218,6 @@ const MarketDetails = ({navigation}) => {
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={initialLayout}
-        style={{marginTop: StatusBar.currentHeight}}
         key={routes.key}></TabView>
 
       <Footer />

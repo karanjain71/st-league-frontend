@@ -27,10 +27,10 @@ function App() {
         <Stack.Navigator>
           {isAuthenticated ? (
             <>
+              <Stack.Screen name="My Contests" component={MyContests} />
               <Stack.Screen name="Market Details" component={MarketDetails} />
               <Stack.Screen name="Profile" component={Profile} />
               <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="My Contests" component={MyContests} />
               <Stack.Screen name="More Settings" component={MoreSettings} />
               <Stack.Screen name="Footer" component={Footer} />
             </>

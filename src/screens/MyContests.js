@@ -7,15 +7,22 @@ import {
   Animated,
   Pressable,
 } from 'react-native';
-import {TabView, SceneMap} from 'react-native-tab-view';
-import {NativeBaseProvider, Box, Text} from 'native-base';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {NativeBaseProvider, Box, Text, Divider} from 'native-base';
 import Footer from '../components/Footer';
+import {notInitialized} from 'react-redux/es/utils/useSyncExternalStore';
 
-const PastRoute = () => <Box flex={1} bg="white" />;
+const PastRoute = () => (
+  <View style={[styles.scene, {backgroundColor: 'white'}]} />
+);
 
-const LiveRoute = () => <Box flex={1} bg="white" />;
+const LiveRoute = () => (
+  <View style={[styles.scene, {backgroundColor: 'white'}]}></View>
+);
 
-const UpcomingRoute = () => <Box flex={1} bg="white" />;
+const UpcomingRoute = () => (
+  <View style={[styles.scene, {backgroundColor: 'white'}]} />
+);
 
 const initialLayout = {width: Dimensions.get('window').width};
 
@@ -33,31 +40,52 @@ const MyContests = ({navigation}) => {
     {key: 'live', title: 'Live'},
     {key: 'upcoming', title: 'Upcoming'},
   ]);
+  const handleIndexChange = index => this.setState({index});
 
   const renderTabBar = props => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
     return (
-      <Box flexDirection="row">
-        {props.navigationState.routes.map((route, i) => {
-          const opacity = props.position.interpolate({
-            inputRange,
-            outputRange: inputRange.map(inputIndex =>
-              inputIndex === i ? 1 : 0.5,
-            ),
-          });
-
-          return (
-            <Box flex={1} alignItems="center" mx="3" p={2} cursor="pointer">
-              <Pressable
-                onPress={() => {
-                  setIndex(i);
-                }}>
-                <Animated.Text style={{opacity}}>{route.title}</Animated.Text>
-              </Pressable>
-            </Box>
-          );
-        })}
-      </Box>
+      <>
+        {/* <Box flexDirection="row">
+          {props.navigationState.routes.map((route, i) => {
+            const opacity = props.position.interpolate({
+              inputRange,
+              outputRange: inputRange.map(inputIndex =>
+                inputIndex === i ? 1 : 0.3,
+              ),
+            });
+            return (
+              <Box flex={1} alignItems="center" mx="3" cursor="pointer" key={i}>
+                <Pressable
+                  style={{
+                    paddingHorizontal: 10,
+                    borderBottomColor: 'black',
+                    paddingBottom: 10,
+                    borderBottomWidth: 3,
+                  }}
+                  onPress={() => {
+                    setIndex(i);
+                  }}>
+                  <Animated.Text
+                    style={{
+                      opacity,
+                    }}>
+                    {route.title}
+                  </Animated.Text>
+                </Pressable>
+              </Box>
+            );
+          })}
+        </Box> */}
+        <TabBar
+          {...props}
+          indicatorStyle={{backgroundColor: 'white'}}
+          renderLabel={({route, focused, color}) => (
+            <Text style={{color}}>{route.title}</Text>
+          )}
+        />
+        <Divider />
+      </>
     );
   };
 
@@ -69,7 +97,6 @@ const MyContests = ({navigation}) => {
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={initialLayout}
-        style={{marginTop: StatusBar.currentHeight}}
       />
       <Footer />
     </NativeBaseProvider>
@@ -99,5 +126,8 @@ const styles = StyleSheet.create({
   image: {
     width: 400,
     height: 400,
+  },
+  scene: {
+    flex: 1,
   },
 });
