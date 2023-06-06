@@ -22,6 +22,8 @@ const Login = ({navigation}) => {
 
   const loginSubmit = async () => {
     const response = await postLogin(email, password);
+    window.localStorage.setItem('token', response?.token);
+    console.log(window.localStorage.getItem('token'));
   };
 
   return (

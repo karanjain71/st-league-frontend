@@ -19,7 +19,7 @@ import MarketDetails from './screens/MarketDetails';
 const Stack = createStackNavigator();
 
 function App() {
-  const isAuthenticated = true;
+  const isAuthenticated = window.localStorage.getItem('token');
 
   return (
     <>
