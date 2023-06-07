@@ -13,6 +13,7 @@ import {
   Stack,
   Heading,
 } from 'native-base';
+import {View} from 'react-native';
 import Footer from './../components/Footer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -49,10 +50,16 @@ function Profile() {
       value: 'NULL',
       icon: 'address-card',
     },
+    {
+      id: '28694a0f-3da1-471f-bd96-142456e29d721',
+      itemKey: 'Aadhaar Card2',
+      value: 'NULL',
+      icon: 'address-card',
+    },
   ];
   return (
     <>
-      <ScrollView h={10}>
+      <View h={10}>
         <Center>
           <Image
             my={3}
@@ -160,7 +167,7 @@ function Profile() {
           )}
           keyExtractor={item => item.id}
         />
-      </ScrollView>
+      </View>
       <Footer />
     </>
   );

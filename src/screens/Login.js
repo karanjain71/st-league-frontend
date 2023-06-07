@@ -15,15 +15,23 @@ import {
 import LoginImage from '../assets/login-image.jpg';
 import {CurrentRenderContext} from '@react-navigation/native';
 import {postLogin} from '../helpers/backend_helper';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginUser} from '../store/auth/authSlice';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('karanjain71@gmail.com');
   const [password, setPassword] = useState('aditi');
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.authToken);
 
   const loginSubmit = async () => {
-    const response = await postLogin(email, password);
-    window.localStorage.setItem('token', response?.token);
-    console.log(window.localStorage.getItem('token'));
+    const payload = {
+      username: email,
+      password,
+    };
+    dispatch(loginUser(payload));
+    // window.localStorage.setItem('token', response?.token);
+    // console.log(window.localStorage.getItem('token'));
   };
 
   return (
@@ -60,6 +68,20 @@ const Login = ({navigation}) => {
               style={[styles.buttons, {backgroundColor: '#0096FF'}]}
               onPress={() => loginSubmit()}>
               <Text>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Forgot Password')}
+              style={{marginTop: 10}}>
+              <Text style={{color: '#000', textAlign: 'center'}}>
+                Forgot Password?
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Reset Password')}
+              style={{marginTop: 10}}>
+              <Text style={{color: '#000', textAlign: 'center'}}>
+                Reset Password?
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('Register')}

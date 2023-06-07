@@ -11,6 +11,7 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {NativeBaseProvider, Box, Text, Divider} from 'native-base';
 import Footer from '../components/Footer';
 import {notInitialized} from 'react-redux/es/utils/useSyncExternalStore';
+import {useSelector} from 'react-redux';
 
 const PastRoute = () => (
   <View style={[styles.scene, {backgroundColor: 'white'}]} />
@@ -35,6 +36,7 @@ const renderScene = SceneMap({
 
 const MyContests = ({navigation}) => {
   const [index, setIndex] = React.useState(0);
+  const token = useSelector(state => state.auth.authToken);
   const [routes] = React.useState([
     {key: 'past', title: 'Past'},
     {key: 'live', title: 'Live'},

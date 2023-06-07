@@ -11,6 +11,7 @@ export const postLogin = async (email, password) => {
     .post(url.POST_LOGIN, payload)
     .then(response => {
       if (response.status >= 200 || response.status <= 299) {
+        console.log(JSON.stringify(response.data));
         return JSON.stringify(response.data);
       }
       throw response.data;

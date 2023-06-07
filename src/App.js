@@ -15,11 +15,13 @@ import Profile from './screens/Profile';
 import MoreSettings from './screens/MoreSettings';
 import Footer from './components/Footer';
 import MarketDetails from './screens/MarketDetails';
+import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
 
 function App() {
-  const isAuthenticated = window.localStorage.getItem('token');
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  console.log(isAuthenticated, ' in app');
 
   return (
     <>

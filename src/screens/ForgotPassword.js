@@ -8,13 +8,17 @@ import {
   Heading,
   Input,
   Item,
+  Center,
+  Box,
 } from 'native-base';
 
-import Login from '../assets/login-image.jpg';
+import LoginImage from '../assets/login-image.jpg';
 import {CurrentRenderContext} from '@react-navigation/native';
+import {forgotPasswordAction} from '../store/auth/authSlice';
+import {useDispatch} from 'react-redux';
 
 const ForgotPassword = ({navigator}) => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const postState = useSelector((state) => state.post)
   // const userState = useSelector((state) => state.auth)
   // console.log(postState,'poststate')
@@ -30,36 +34,41 @@ const ForgotPassword = ({navigator}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const forgotPassword = async () => {
+    const payload = {
+      username: email,
+    };
+    dispatch(forgotPasswordAction(payload));
+  };
+
   return (
     <>
-      <Container>
+      <Center flex={1} style={styles.container}>
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
-          <Heading>Forgot Password</Heading>
-          <Image
-            source={Welcome}
-            style={{width: null, height: 150, marginTop: 30}}
-            resizeMode="contain"
-          />
+          <Image source={LoginImage} style={styles.image}></Image>
+          <Heading mx="5">Forgot Password</Heading>
           <FormControl>
-            <Input
-              placeholder="Enter your registerd email"
-              value={email}
-              style={{color: '#000'}}
-              onChangeText={text => setEmail(text)}
-            />
-            <Button block>
-              <Text>Forgot Password</Text>
-            </Button>
+            <Box alignItems="center">
+              <Input
+                mt="4"
+                mb="2"
+                placeholder="Email"
+                w="90%"
+                value={email}
+                style={[styles.input, {color: '#000'}]}
+                onChangeText={text => setEmail(text)}
+              />
+            </Box>
+            ;
             <TouchableOpacity
-              onPress={() => navigation.navigate('SignUp')}
-              style={{marginTop: 10}}>
-              <Text style={{color: '#000', textAlign: 'center'}}>
-                Do not have an account, SignUp here
-              </Text>
+              block
+              style={[styles.buttons, {backgroundColor: '#0096FF'}]}
+              onPress={() => forgotPassword()}>
+              <Text>Forgot Password</Text>
             </TouchableOpacity>
           </FormControl>
         </ScrollView>
-      </Container>
+      </Center>
     </>
   );
 };
@@ -68,17 +77,24 @@ export default ForgotPassword;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1b262c',
+    // backgroundImage: "../assets/login-page.jpg",
+    backgroundColor: 'white',
     flex: 1,
     justifyContent: 'flex-start',
   },
-  heading: {
-    textAlign: 'center',
-    color: '#fdcb9e',
-    marginHorizontal: 5,
-    marginTop: 30,
+  buttons: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderRadius: 7,
+    marginHorizontal: 15,
+    marginVertical: 20,
   },
-  formItem: {
-    marginBottom: 20,
+  input: {},
+  image: {
+    width: 400,
+    height: 400,
   },
 });

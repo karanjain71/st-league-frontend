@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const axiosApi = axios.create({
@@ -8,10 +9,13 @@ const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 axiosApi.interceptors.request.use(
-  config => {
-    config.headers[
-      'Authorization'
-    ] = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJhbmphaW43MUBnbWFpbC5jb20iLCJleHAiOjE3NjcyMDg4NjgsImlhdCI6MTY4NTE5NTc4Nn0.knlzjVEJ6dgIERMukGGwYcOA_0dQaufjpafNWjedxbvLNfiBETfzk0Bw-hfdPZwnVulkRPnVbBJ5h1zTiv0JHA`;
+  async config => {
+    console.log(config.addAuth + ' do glfhgdj');
+    const token = await AsyncStorage.getItem('authToken');
+    if (config.addAuth == true) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    console.log(JSON.stringify(config) + ' here updated');
     return config;
   },
   error => Promise.reject(error),
